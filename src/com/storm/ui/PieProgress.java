@@ -44,8 +44,7 @@ class PieProgress extends View {
 	private static final Xfermode PORTER_DUFF_CLEAR = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
 	private int mColorForeground = Color.WHITE;
 	private int mColorBackground = Color.BLACK;
-	private float mValue;
-	private boolean mPieStyle;
+	private int mProgress;
 	/**
 	 * Value which makes our custom drawn indicator have roughly the same size
 	 * as the built-in ProgressBar indicator. Unit: dp
@@ -92,30 +91,6 @@ class PieProgress extends View {
 		a.recycle();
 	}
 
-	/**
-	 * Set the style of this indicator.The two supported styles are "wheel" and
-	 * "pie"
-	 * 
-	 * @param style
-	 *            One of {@link STYLE_WHEEL} or {@link STYLE_PIE}
-	 */
-	public void setPieStyle(boolean pieStyle) {
-		if (mPieStyle == pieStyle) {
-			return;
-		}
-		mPieStyle = pieStyle;
-		updateBitmap();
-	}
-
-	/**
-	 * Return the current style of this indicator.
-	 * 
-	 * @return <tt>True</tt> if the indicator has the "pie" style
-	 */
-	public boolean getIsPieStyle() {
-		return mPieStyle;
-	}
-
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawBitmap(mBitmap, getWidth() / 2 - mBitmap.getWidth() / 2, getHeight() / 2
@@ -155,11 +130,19 @@ class PieProgress extends View {
 	}
 
 	/**
-	 * @param value
-	 *            A number between 0 and 1
+	 * @param progress
+	 *            A number between 0 and 360
 	 */
-	public synchronized void setValue(float value) {
-		mValue = value;
+	public synchronized void setProgress(int progress) {
+		mProgress = progress;
+		if (progress > 360) {
+			mProgress = 360;
+		}
+		updateBitmap();
+	}
+	
+	public void reset() {
+		mProgress = 0;
 		updateBitmap();
 	}
 
@@ -171,15 +154,11 @@ class PieProgress extends View {
 				Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(mBitmap);
 		canvas.drawArc(mRect, -90, 360, true, mPaintBackground);
-		if (mValue < 0.01f) {
+		if (mProgress < 3) {
 			canvas.drawLine(mRect.width() / 2, mRect.height() / 2, mRect.width() / 2, 0,
 					mPaintForeground);
 		}
-		float angle = mValue * 360;
-		canvas.drawArc(mRect, -90, angle, true, mPaintForeground);
-		if (!mPieStyle) {
-			canvas.drawArc(mRectInner, -90, 360, true, mPaintErase);
-		}
+		canvas.drawArc(mRect, -90, mProgress, true, mPaintForeground);
 		postInvalidate();
 	}
 }

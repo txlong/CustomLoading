@@ -33,21 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.storm.ui.ProgressWheel
-        xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/progress_bar_one"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        ProgressWheel:barColor="#222"
-        ProgressWheel:barLength="30dp"
-        ProgressWheel:barWidth="6dp"
-        ProgressWheel:delayMillis="75"
-        ProgressWheel:rimColor="#4000"
-        ProgressWheel:rimWidth="2dp"
-        ProgressWheel:spinSpeed="20dp"
-        ProgressWheel:textColor="#222222"
-        ProgressWheel:textSize="14sp" />
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -75,11 +60,52 @@
             ProgressWheel:textColor="#222222"
             ProgressWheel:textSize="14sp" />
 
+        <com.storm.ui.ProgressWheel
+            xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/progress_bar_one"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            ProgressWheel:barColor="#222"
+            ProgressWheel:barLength="30dp"
+            ProgressWheel:barWidth="6dp"
+            ProgressWheel:delayMillis="75"
+            ProgressWheel:rimColor="#4000"
+            ProgressWheel:rimWidth="2dp"
+            ProgressWheel:spinSpeed="20dp"
+            ProgressWheel:textColor="#222222"
+            ProgressWheel:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_start2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="start" />
+
+        <!-- default style -->
+
         <com.storm.ui.PieProgress
             xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/progress_indicator"
-            android:layout_width="64dp"
-            android:layout_height="64dp" />
+            android:id="@+id/pie_progress1"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+
+        <!-- custom style -->
+
+        <com.storm.ui.PieProgress
+            xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/pie_progress2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            PieProgress:foregroundColor="#339BB9"
+            PieProgress:backgroundColor="#FF4444" />
     </LinearLayout>
 
 </LinearLayout>
