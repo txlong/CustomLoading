@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -35,9 +34,10 @@
         android:layout_height="wrap_content" />
 
     <com.storm.ui.ProgressWheel
+        xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progress_bar_one"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         ProgressWheel:barColor="#222"
         ProgressWheel:barLength="30dp"
         ProgressWheel:barWidth="6dp"
@@ -62,23 +62,24 @@
             android:text="start" />
 
         <com.storm.ui.ProgressWheel
+            xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progress_bar_two"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             ProgressWheel:barColor="#339BB9"
-            ProgressWheel:barLength="60dp"
-            ProgressWheel:barWidth="15dp"
+            ProgressWheel:barWidth="4dp"
             ProgressWheel:rimColor="#44000000"
-            ProgressWheel:rimWidth="15dp"
+            ProgressWheel:rimWidth="4dp"
             ProgressWheel:spinSpeed="3dp"
             ProgressWheel:text="click"
             ProgressWheel:textColor="#222222"
             ProgressWheel:textSize="14sp" />
 
-        <com.storm.ui.ProgressIndicator
+        <com.storm.ui.PieProgress
+            xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progress_indicator"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
+            android:layout_width="64dp"
+            android:layout_height="64dp" />
     </LinearLayout>
 
 </LinearLayout>

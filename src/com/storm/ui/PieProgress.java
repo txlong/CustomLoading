@@ -17,6 +17,7 @@ package com.storm.ui;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,7 +35,7 @@ import com.storm.customloading.R;
  * Class used internally by {@link RefreshActionItem} to show a determinate
  * progress indicator. Two display modes are supported "wheel" and "pie"
  */
-class ProgressIndicator extends View {
+class PieProgress extends View {
 	private final RectF mRect = new RectF();
 	private final RectF mRectInner = new RectF();
 	private final Paint mPaintForeground = new Paint();
@@ -59,12 +60,14 @@ class ProgressIndicator extends View {
 	 */
 	private static final float INNER_RADIUS_RATIO = 0.84f;
 
-	public ProgressIndicator(Context context) {
+	public PieProgress(Context context) {
 		this(context, null);
 	}
 
-	public ProgressIndicator(Context context, AttributeSet attrs) {
+	public PieProgress(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		parseAttributes(context.obtainStyledAttributes(attrs, R.styleable.PieProgress));
+		
 		Resources r = context.getResources();
 		float scale = r.getDisplayMetrics().density;
 		mPadding = scale * PADDING + r.getDimension(R.dimen.actionbar_vertival_padding);
@@ -74,6 +77,19 @@ class ProgressIndicator extends View {
 		mPaintBackground.setAntiAlias(true);
 		mPaintErase.setXfermode(PORTER_DUFF_CLEAR);
 		mPaintErase.setAntiAlias(true);
+	}
+	
+	/**
+	 * Parse the attributes passed to the view from the XML
+	 * 
+	 * @param a
+	 *            the attributes to parse
+	 */
+	private void parseAttributes(TypedArray a) {
+		mColorForeground = a.getColor(R.styleable.PieProgress_foregroundColor, mColorForeground);
+		mColorBackground = a.getColor(R.styleable.PieProgress_backgroundColor, mColorBackground);
+		// Recycle
+		a.recycle();
 	}
 
 	/**

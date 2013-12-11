@@ -27,7 +27,7 @@ import com.storm.customloading.R;
 public class MainActivity extends Activity {
 
 	private ProgressWheel pwOne, pwTwo;
-	private ProgressIndicator mProgressIndicator;
+	private PieProgress mProgressIndicator;
 	boolean running;
 	int wheelProgress = 0, indicatorProgress = 0;
 
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
 		pwOne = (ProgressWheel) findViewById(R.id.progress_bar_one);
 		pwTwo = (ProgressWheel) findViewById(R.id.progress_bar_two);
-		mProgressIndicator = (ProgressIndicator) findViewById(R.id.progress_indicator);
+		mProgressIndicator = (PieProgress) findViewById(R.id.progress_indicator);
 		mProgressIndicator.setPieStyle(true);
 		pwOne.spin();
 //		new Thread(r).start();
