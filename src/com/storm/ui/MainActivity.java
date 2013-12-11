@@ -27,28 +27,30 @@ import com.storm.customloading.R;
 public class MainActivity extends Activity {
 
 	private ProgressWheel pwOne, pwTwo;
+	private ProgressIndicator mProgressIndicator;
 	boolean running;
-	int progress = 0;
+	int wheelProgress = 0, indicatorProgress = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 
 		pwOne = (ProgressWheel) findViewById(R.id.progress_bar_one);
 		pwTwo = (ProgressWheel) findViewById(R.id.progress_bar_two);
+		mProgressIndicator = (ProgressIndicator) findViewById(R.id.progress_indicator);
+		mProgressIndicator.setPieStyle(true);
 		pwOne.spin();
-		Thread s = new Thread(r);
-		s.start();
+//		new Thread(r).start();
+		new Thread(indicatorRunnable).start();
 
 		Button startBtn = (Button) findViewById(R.id.btn_start);
 		startBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (!running) {
-					progress = 0;
+					wheelProgress = 0;
 					pwTwo.resetCount();
-					Thread s = new Thread(r);
-					s.start();
+					new Thread(r).start();
 				}
 			}
 		});
@@ -57,9 +59,9 @@ public class MainActivity extends Activity {
 	final Runnable r = new Runnable() {
 		public void run() {
 			running = true;
-			while (progress < 361) {
+			while (wheelProgress < 361) {
 				pwTwo.incrementProgress();
-				progress++;
+				wheelProgress++;
 				try {
 					Thread.sleep(15);
 				} catch (InterruptedException e) {
@@ -67,6 +69,20 @@ public class MainActivity extends Activity {
 				}
 			}
 			running = false;
+		}
+	};
+
+	final Runnable indicatorRunnable = new Runnable() {
+		public void run() {
+			while (indicatorProgress < 361) {
+				mProgressIndicator.setValue(indicatorProgress / (float) 360);
+				indicatorProgress++;
+				try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	};
 }

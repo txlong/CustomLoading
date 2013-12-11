@@ -74,6 +74,11 @@
             ProgressWheel:text="click"
             ProgressWheel:textColor="#222222"
             ProgressWheel:textSize="14sp" />
+
+        <com.storm.ui.ProgressIndicator
+            android:id="@+id/progress_indicator"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
     </LinearLayout>
 
 </LinearLayout>
