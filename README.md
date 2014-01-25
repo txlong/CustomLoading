@@ -5,4 +5,4 @@ CustomLoading For Android
 
 You can get and install the apk in the apkfile folder.
 
-![Sample image](https://raw.github.com/stormzhang/CustomLoading/master/sample.gif)
+![Sample image](https://raw.github.com/stormzhang/CustomLoading/master/snap.jpg)
