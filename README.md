@@ -1,7 +1,7 @@
 CustomLoading For Android
 =============
 
-## Collect Awesome loadings in Android
+## This project is no longer being maintained
 
 You can get and install the apk in the apkfile folder.
 
