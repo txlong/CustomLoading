@@ -30,11 +30,17 @@ import com.storm.customloading.R.id;
 import com.storm.customloading.R.layout;
 
 public class CustomClipLoading extends FrameLayout {
-
+	
+	/** level:The new level, from 0 (minimum) to 10000 (maximum). */
 	private static final int MAX_PROGRESS = 10000;
+	/** 找到水杯的最低端 */
+	private static final int START_LEVEL = MAX_PROGRESS * 27 / 108;
+	/** 找到水杯的最顶端 */
+	private static final int END_LEVEL = MAX_PROGRESS * 75 / 108;
+
 	private ClipDrawable mClipDrawable;
-	private int mProgress = 0;
-	private boolean running;
+	private int mProgress = START_LEVEL;
+	private boolean running = true;
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -45,7 +51,6 @@ public class CustomClipLoading extends FrameLayout {
 		}
 	};
 
-	
 	public CustomClipLoading(Context context) {
 		this(context, null, 0);
 	}
@@ -64,24 +69,23 @@ public class CustomClipLoading extends FrameLayout {
 		addView(view);
 		ImageView imageView = (ImageView) findViewById(id.iv_progress);
 		mClipDrawable = (ClipDrawable) imageView.getDrawable();
-		
+
 		Thread s = new Thread(r);
 		s.start();
 	}
 
 	public void stop() {
-		mProgress = 0;
+		mProgress = START_LEVEL;
 		running = false;
 	}
 
 	Runnable r = new Runnable() {
 		@Override
 		public void run() {
-			running = true;
 			while (running) {
 				handler.sendEmptyMessage(0x123);
-				if (mProgress > MAX_PROGRESS) {
-					mProgress = 0;
+				if (mProgress > END_LEVEL) {
+					mProgress = START_LEVEL;
 				}
 				mProgress += 100;
 				try {
